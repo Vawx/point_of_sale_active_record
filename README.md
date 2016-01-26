@@ -1,10 +1,8 @@
-# Default app structure for Sinatra
+# Point of sale
 
 ## Use
 
-clone `https://github.com/Vawx/empty_sinatra`
-
-terminal `bundle install`
+clone `https://github.com/Vawx/point_of_sale_active_record`
 
 ## License
 MIT <2016>
