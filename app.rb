@@ -47,7 +47,7 @@ post '/add_product/:purchase_id/:id' do
   @total_cost = "0.0"
   @products = Product.all
   @products.each do |prod|
-    if prod.purchase_id == @purchase.id
+    if prod.purchase_id == @purchase.id || prod.purchased
       prod.update( {purchased: true})
       prod.update( {inventory_count: prod.inventory_count - 1 })
       @cart.push( prod )
