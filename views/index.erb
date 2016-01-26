@@ -5,12 +5,14 @@
     <div class="well">
       <ul>
       <% @products.each do |p| %>
-        <li><p><b><%=p.name%></b> - Cost: <%=p.cost%></p></li>
-        <% if @user != "manager" %>
-          <form class="" action="/add_product/<%=@purchase.id%>/<%=p.id%>" method="post">
-            <button type="submit" class="btn btn-info" name="button">Add to cart</button>
-          </form>
-        <% end %>
+        <% if p.inventory_count > 0 %>
+          <li><p><b><%=p.name%></b> - Cost: <%=p.cost%> - InvAmount: <%=p.inventory_count%></p></li>
+          <% if @user != "manager" && p.inventory_count > 0 %>
+            <form class="" action="/add_product/<%=@purchase.id%>/<%=p.id%>" method="post">
+              <button type="submit" class="btn btn-info" name="button">Add to cart</button>
+            </form>
+          <% end %>
+        <%end%>
       <%end%>
       </ul>
     </div>
@@ -24,6 +26,10 @@
         <div class="">
           <input type="text" name="product_name" value="" placeholder="Product name...">
           <input type="number" name="product_cost" value="" placeholder="Product cost...">
+          <div class="">
+            <label for="">Inventory amount</label>
+            <input type="number" name="inventory_amount" value="1" placeholder="Inventory amount...">
+          </div>
           <div class="container" style="padding-top:12px;">
             <button type="submit" class="btn btn-success" name="button">Add Product</button>
           </div>
@@ -38,7 +44,9 @@
       <label for="add_product">Shopping Cart</label>
       <ul>
       <% @cart.each do |c| %>
-        <li><p><b><%=c.name%></b> - Cost: <%=c.cost%></p></li>
+        <% if c.purchase_id == @purchase.id && c.purchased %>
+          <li><p><b><%=c.name%></b> - Cost: <%=c.cost%></p></li>
+        <%end%>
       <%end%>
       </ul>
       <div class="">
