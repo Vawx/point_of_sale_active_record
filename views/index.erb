@@ -3,13 +3,23 @@
   <div class="col-lg-6 col-md-6">
     <label for="well">Inventory</label>
     <div class="well">
-
+      <ul>
+      <% @products.each do |p| %>
+        <li><p><b><%=p.name%></b> - Cost: <%=p.cost%></p></li>
+        <% if @user != "manager" %>
+          <form class="" action="/add_product/<%=@purchase.id%>/<%=p.id%>" method="post">
+            <button type="submit" class="btn btn-info" name="button">Add to cart</button>
+          </form>
+        <% end %>
+      <%end%>
+      </ul>
     </div>
   </div>
   <div class="col-lg-6 col-md-6">
+    <% if @user == "manager" %>
     <label for="well">Manage Products</label>
     <div class="well">
-      <form class="" action="/add_product/" method="post">
+      <form class="" action="/add_product_to_inventory" method="post">
         <label for="add_product">Add a product</label>
         <div class="">
           <input type="text" name="product_name" value="" placeholder="Product name...">
@@ -21,4 +31,27 @@
       </form>
     </div>
   </div>
+  <% else %>
+  <label for="well">Purchase Products</label>
+  <div class="well">
+    <form class="" action="/buy_products/<%=@purchase.id%>" method="post">
+      <label for="add_product">Shopping Cart</label>
+      <ul>
+      <% @cart.each do |c| %>
+        <li><p><b><%=c.name%></b> - Cost: <%=c.cost%></p></li>
+      <%end%>
+      </ul>
+      <div class="">
+        <% if @total_cost.to_f <= 0.0 %>
+          <label for="">Cost: 0.0</label>
+        <% else %>
+          <label for="">Cost: <%=@total_cost%></label>
+        <% end%>
+        <div class="container" style="padding-top:12px;">
+          <button type="submit" class="btn btn-success" name="button">Purchase</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <%end%>
 </div>

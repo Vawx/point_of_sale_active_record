@@ -12,6 +12,14 @@
       <div class="jumbotron">
         <a href="/"><h1>Point of sale</h1></a>
         <p>Track your inventory.</p>
+
+        <form class="" action="/switch_user" method="">
+          <select name="select_id" id="select_id">
+            <option value="manager">Manager</option>
+            <option value="customer">Customer</option>
+          </select>
+          <button type="submit" class="btn btn-default" name="button">Switch User</button>
+        </form>
       </div>
     </div>
     <%=yield%>
