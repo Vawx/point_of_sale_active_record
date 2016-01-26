@@ -3,6 +3,7 @@ class CreateProduct < ActiveRecord::Migration
     create_table(:products) do |product|
       product.column :name, :string
       product.column :cost, :float
+      product.timestamps
     end
   end
 end
